@@ -40,6 +40,7 @@ router.post('/register', (req,res)=>{
 });
 
 router.post("/login",async (req,res)=>{
+
     try{
         const {email, password}= req.body;
         if(!email || !password){
@@ -51,6 +52,7 @@ router.post("/login",async (req,res)=>{
             res.status(400).json({message: "Invalid Credentials"})
         }
         else{ 
+
             const isMatch= await bcrypt.compare(password, userLogin.password);
 
             const token = await userLogin.generateAuthToken();
@@ -58,7 +60,7 @@ router.post("/login",async (req,res)=>{
                 expires: new Date(Date.now() +25892000000),
                 httpOnly: true
             })
-
+            
             if(isMatch){
                 res.json({error: "User logged in successfully."})
             }
