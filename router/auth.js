@@ -73,7 +73,7 @@ router.post("/login",async (req,res)=>{
     }
 })
 
-router.get("/getdata", (req,res)=>{
+router.get("/getdata",authenticate, (req,res)=>{
     console.log("authentication successful");
     res.send(req.rootUser);
 })
